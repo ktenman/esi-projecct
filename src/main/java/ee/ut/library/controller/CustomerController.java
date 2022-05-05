@@ -4,6 +4,7 @@ import ee.ut.library.domain.entity.Customer;
 import ee.ut.library.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +17,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@Api(value = "Operations related to user entity")
+@AllArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping
     @ApiOperation(value = "Retrieves all users")
@@ -52,4 +49,5 @@ public class CustomerController {
     public void deleteById(@PathVariable Long id) {
         customerService.delete(id);
     }
+
 }

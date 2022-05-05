@@ -1,0 +1,40 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.hibernate.SQL: DEBUG
+
+server:
+  port: 8081
+spring:
+  application:
+    name: esi_project
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:54333/library?charSet\=UTF8
+    username: postgres
+    password: admin
+    hikari:
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    database-platform: com.ashok.config.PostgreSQL95Dialect
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        format_sql: true
+        temp.use_jdbc_metadata_defaults: false
+        id.new_generator_mappings: true
+        cache.use_second_level_cache: false
+        cache.use_query_cache: false
+        generate_statistics: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master-changelog.yaml
+    contexts: production

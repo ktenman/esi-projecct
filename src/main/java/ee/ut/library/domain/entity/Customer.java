@@ -10,7 +10,6 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-@Table(name = "customer")
 public class Customer {
     private static final String SEQ_CUSTOMER = "seq_customer";
 
