@@ -25,7 +25,7 @@ class CustomerServiceImplTest {
     @Test
     void get() {
         Long id = 222L;
-        Customer expectedCustomer = Customer.builder().id(id).build();
+        Customer expectedCustomer = new Customer(c -> c.setId(id));
         when(customerRepository.findById(id)).thenReturn(Optional.of(expectedCustomer));
 
         Customer actualCustomer = customerService.get(id);

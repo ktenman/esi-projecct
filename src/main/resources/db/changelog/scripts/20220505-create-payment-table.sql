@@ -5,13 +5,17 @@ CREATE SEQUENCE IF NOT EXISTS seq_payment;
 
 CREATE TABLE IF NOT EXISTS payment
 (
-    id           BIGINT NOT NULL
+    id          BIGINT    NOT NULL
         CONSTRAINT payment_pkey
             PRIMARY KEY,
-    details            JSONB       NOT NULL,
-    customer_id     bigint       not null
-    constraint fk_payment_customer
-    references customer
+    details     JSONB     NOT NULL,
+    customer_id BIGINT    NOT NULL
+        CONSTRAINT fk_payment_customer
+            REFERENCES customer,
+    created_at  TIMESTAMP NOT NULL,
+    created_by  BIGINT,
+    modified_at TIMESTAMP,
+    modified_by BIGINT
 );
 
 ALTER SEQUENCE IF EXISTS seq_payment

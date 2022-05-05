@@ -30,12 +30,12 @@ class CustomerControllerIntegrationTest extends TestBase {
     void findAllCustomers() throws Exception {
         assertThat(customerRepository.findAll()).isEmpty();
 
-        Customer customer = Customer.builder()
-                .address("aasdfa")
-                .email("sfda@fsda.com")
-                .name("nanme")
-                .phoneNumber("454353")
-                .build();
+        Customer customer = new Customer(c -> {
+            c.setAddress("aasdfa");
+            c.setEmail("sfda@fsda.com");
+            c.setName("nanme");
+            c.setPhoneNumber("454353");
+        });
 
         mockMvc.perform(post("/customers")
                         .contentType(APPLICATION_JSON)

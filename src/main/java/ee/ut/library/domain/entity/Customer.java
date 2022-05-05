@@ -1,7 +1,5 @@
 package ee.ut.library.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,15 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import java.util.function.Consumer;
 
 @Entity
 @Setter
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Customer extends Auditable {
     private static final String SEQ_CUSTOMER = "seq_customer";
+
+    public Customer(Consumer<Customer> builder) {
+        builder.accept(this);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_CUSTOMER)

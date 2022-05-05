@@ -5,7 +5,7 @@ CREATE SEQUENCE IF NOT EXISTS seq_customer;
 
 CREATE TABLE IF NOT EXISTS customer
 (
-    id           BIGINT NOT NULL
+    id           BIGINT    NOT NULL
         CONSTRAINT customer_pkey
             PRIMARY KEY,
     name         VARCHAR,
@@ -15,7 +15,11 @@ CREATE TABLE IF NOT EXISTS customer
             UNIQUE,
     phone_number VARCHAR,
     id_code      VARCHAR,
-    fine_amount  DECIMAL(10, 5)
+    fine_amount  DECIMAL(10, 5),
+    created_at   TIMESTAMP NOT NULL,
+    created_by   BIGINT,
+    modified_at  TIMESTAMP,
+    modified_by  BIGINT
 );
 
 ALTER SEQUENCE IF EXISTS seq_customer

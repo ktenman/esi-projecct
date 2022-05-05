@@ -5,7 +5,7 @@ CREATE SEQUENCE IF NOT EXISTS seq_librarian;
 
 CREATE TABLE IF NOT EXISTS librarian
 (
-    id           BIGINT NOT NULL
+    id           BIGINT    NOT NULL
         CONSTRAINT librarian_pkey
             PRIMARY KEY,
     name         VARCHAR,
@@ -13,7 +13,11 @@ CREATE TABLE IF NOT EXISTS librarian
     email        VARCHAR
         CONSTRAINT librarian_email
             UNIQUE,
-    phone_number VARCHAR
+    phone_number VARCHAR,
+    created_at   TIMESTAMP NOT NULL,
+    created_by   BIGINT,
+    modified_at  TIMESTAMP,
+    modified_by  BIGINT
 );
 
 ALTER SEQUENCE IF EXISTS seq_librarian
