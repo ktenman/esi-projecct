@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @Api(value = "Operations related to user entity")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
