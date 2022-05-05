@@ -7,10 +7,11 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import java.util.function.Consumer;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Setter
@@ -24,7 +25,7 @@ public class Customer extends Auditable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_CUSTOMER)
+    @GeneratedValue(strategy = SEQUENCE, generator = SEQ_CUSTOMER)
     @SequenceGenerator(name = SEQ_CUSTOMER, sequenceName = SEQ_CUSTOMER, allocationSize = 1)
     private Long id;
     private String name;
