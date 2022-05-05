@@ -1,0 +1,5 @@
+# master-changelog.yaml
+databaseChangeLog:
+  - include:
+      file: db/changelog/scripts/20220504-create-user-table.sql
+      context: local, production
