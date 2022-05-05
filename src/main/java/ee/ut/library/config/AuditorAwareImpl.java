@@ -1,16 +1,15 @@
 package ee.ut.library.config;
 
+import ee.ut.library.security.SecurityUtils;
 import org.springframework.data.domain.AuditorAware;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public class AuditorAwareImpl implements AuditorAware<UUID> {
+public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
-    public Optional<UUID> getCurrentAuditor() {
+    public Optional<String> getCurrentAuditor() {
         //  Spring Security to return currently logged user
-//TODO: modifiy this part after implementing the security
-        return Optional.ofNullable(UUID.randomUUID());
+        return SecurityUtils.getCurrentUsername();
     }
 }

@@ -4,6 +4,7 @@ import ee.ut.library.domain.entity.User;
 import ee.ut.library.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,12 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @GetMapping("/current")
+    public User getActualUser() {
+        return userService.getUserWithAuthorities();
+    }
+
 
     @GetMapping
     @ApiOperation(value = "Retrieves all users")
