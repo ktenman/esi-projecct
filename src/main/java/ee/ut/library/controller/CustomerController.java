@@ -23,30 +23,30 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    @ApiOperation(value = "Retrieves all users")
+    @ApiOperation(value = "Retrieves all customers")
     public List<Customer> getAll() {
         return customerService.getAll();
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retrieves the user by its id")
+    @ApiOperation(value = "Retrieves the customer by its id")
     public Customer get(@PathVariable Long id) {
         return customerService.get(id);
     }
 
     @PostMapping
-    @ApiOperation(value = "Inserts new user")
+    @ApiOperation(value = "Inserts new customer")
     public Customer save(@Valid @RequestBody Customer customer) {
         return customerService.insert(customer);
     }
     @PutMapping
-    @ApiOperation(value = "Updates the user by its id")
+    @ApiOperation(value = "Updates the customer by its id")
     public Customer update(@Valid @RequestBody Customer customer) {
         return customerService.update(customer);
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete the user by its id")
+    @ApiOperation(value = "Delete the customer by its id")
     public void deleteById(@PathVariable Long id) {
         customerService.delete(id);
     }
