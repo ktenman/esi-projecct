@@ -20,7 +20,7 @@ import java.util.Map;
 @Getter
 @Setter
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class Payment {
+public class Payment extends Auditable {
     private static final String SEQ_PAYMENT = "seq_librarian";
 
     @Id

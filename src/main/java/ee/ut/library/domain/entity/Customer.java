@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -30,7 +32,12 @@ public class Customer extends Auditable {
     private Long id;
     private String name;
     private String address;
-    @Column(unique = true)
+    @NotNull
+    @Column(unique = true, nullable = false)
     private String email;
     private String phoneNumber;
+    @NotNull
+    @Column(unique = true, nullable = false)
+    private String idCode;
+    private BigDecimal fineAmount = BigDecimal.ZERO;
 }
