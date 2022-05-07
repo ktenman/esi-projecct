@@ -12,3 +12,6 @@ databaseChangeLog:
   - include:
       file: db/changelog/scripts/20220507-create-book-table.sql
       context: local, production
+  - include:
+      file: db/changelog/scripts/202205071005-create-book-renting-request-table.sql
+      context: local, production

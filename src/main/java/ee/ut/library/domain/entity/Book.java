@@ -10,10 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
@@ -49,6 +53,10 @@ public class Book extends Auditable {
     private String language;
     @Enumerated(EnumType.STRING)
     private Category category;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    @OrderBy("id DESC")
+    private List<BookRentingRequest> bookRentingRequests;
 
     public void setLanguage(String language) {
         Optional.ofNullable(language)
