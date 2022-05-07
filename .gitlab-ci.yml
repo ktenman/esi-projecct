@@ -3,12 +3,12 @@ stages:
   - deploy
 
 maven-build:
-  image: maven:3-jdk-11
+  image: maven:3.8.5-jdk-11
   stage: build
   script: "mvn package -B"
   artifacts:
     paths:
-      - target/gitlab-ci-demo.jar
+      - target/library-0.0.1-SNAPSHOT.jar
 
 Production:
   image: ruby:latest
