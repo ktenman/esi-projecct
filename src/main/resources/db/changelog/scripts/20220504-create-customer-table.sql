@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS customer
             UNIQUE         NOT NULL,
     fine_amount  DECIMAL(10, 5) DEFAULT 0,
     created_at   TIMESTAMP NOT NULL,
-    created_by   BIGINT,
+    created_by   VARCHAR,
     modified_at  TIMESTAMP,
-    modified_by  BIGINT
+    modified_by  VARCHAR
 );
 
 ALTER SEQUENCE IF EXISTS seq_customer
