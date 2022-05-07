@@ -1,1 +1,1 @@
-web: java -Dspring.profiles.active=prod -Dserver.port=$PORT -jar esi-project-1.0.jar
+web: java -Dspring.profiles.active=prod -Dserver.port=$PORT -jar target/esi-project-1.0.jar
