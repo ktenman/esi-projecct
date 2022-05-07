@@ -54,9 +54,13 @@ public class Book extends Auditable {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     @OrderBy("id DESC")
     private List<BookRentingRequest> bookRentingRequests;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    @OrderBy("id DESC")
+    private List<Review> reviews;
 
     public void setLanguage(String language) {
         Optional.ofNullable(language)
