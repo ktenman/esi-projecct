@@ -1,6 +1,7 @@
 package ee.ut.library;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,9 +12,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = TestBase.DockerPostgreDataSourceInitializer.class)
+@ContextConfiguration(initializers = IntegrationTestBase.DockerPostgreDataSourceInitializer.class)
 @Testcontainers
-public abstract class TestBase {
+@AutoConfigureMockMvc
+public abstract class IntegrationTestBase {
 
     public static PostgreSQLContainer<?> postgreDBContainer = new PostgreSQLContainer<>("postgres:10-alpine");
 

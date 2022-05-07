@@ -1,12 +1,10 @@
 package ee.ut.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ee.ut.library.TestBase;
+import ee.ut.library.IntegrationTestBase;
 import ee.ut.library.domain.entity.Customer;
 import ee.ut.library.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
@@ -16,9 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class CustomerControllerIntegrationTest extends TestBase {
+class CustomerControllerIntegrationTest extends IntegrationTestBase {
     @Resource
     MockMvc mockMvc;
     @Resource
