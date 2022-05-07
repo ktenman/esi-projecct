@@ -14,9 +14,7 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/df5tgegia2p9dl?user=itphewplotswra&password=b90cf03d6c6d6b27bb8f7c224ef01d6f3e6010a987f916dbe7fc5c4432748add
     driver-classname: org.postgresql.Driver
     hikari:
       maximumPoolSize: 5
