@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -36,6 +37,8 @@ public class BookRentingRequest extends Auditable {
     @ManyToOne(optional = false)
     @NotNull
     private Book book;
+
+    private BigDecimal fineAmount;
 
     public enum Status {
         OPEN, CANCELLED, DECLINED, EXPIRED, RENTED
