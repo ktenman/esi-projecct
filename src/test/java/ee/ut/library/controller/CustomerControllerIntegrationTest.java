@@ -35,6 +35,7 @@ class CustomerControllerIntegrationTest extends TestBase {
             c.setEmail("sfda@fsda.com");
             c.setName("nanme");
             c.setPhoneNumber("454353");
+            c.setIdCode("39506100250");
         });
 
         mockMvc.perform(post("/customers")

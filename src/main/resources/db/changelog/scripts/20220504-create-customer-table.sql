@@ -12,10 +12,12 @@ CREATE TABLE IF NOT EXISTS customer
     address      VARCHAR,
     email        VARCHAR
         CONSTRAINT customer_email
-            UNIQUE,
+            UNIQUE         NOT NULL,
     phone_number VARCHAR,
-    id_code      VARCHAR,
-    fine_amount  DECIMAL(10, 5),
+    id_code      VARCHAR
+        CONSTRAINT customer_id_code
+            UNIQUE         NOT NULL,
+    fine_amount  DECIMAL(10, 5) DEFAULT 0,
     created_at   TIMESTAMP NOT NULL,
     created_by   BIGINT,
     modified_at  TIMESTAMP,

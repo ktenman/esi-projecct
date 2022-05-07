@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @Getter
 @Setter
-public class Librarian {
+public class Librarian extends Auditable {
     private static final String SEQ_LIBRARIAN = "seq_librarian";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_LIBRARIAN)
