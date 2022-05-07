@@ -9,7 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import static ee.ut.library.domain.enums.ErrorText.*;
+import static ee.ut.library.domain.enums.ErrorText.ERROR;
+import static ee.ut.library.domain.enums.ErrorText.ERR_USER_NOT_FOUND;
+import static ee.ut.library.domain.enums.ErrorText.VALIDATION_FAILED;
 
 @Slf4j
 @ControllerAdvice

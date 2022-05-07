@@ -9,20 +9,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.util.Date;
-import java.util.UUID;
+import java.time.Instant;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable {
     @CreatedBy
     @Column(updatable = false)
-    protected UUID createdBy;
+    protected Long createdBy;
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
-    protected Date createdAt;
+    protected Instant createdAt;
     @LastModifiedBy
-    protected UUID modifiedBy;
+    protected Long modifiedBy;
     @UpdateTimestamp
-    protected Date modifiedAt;
+    protected Instant modifiedAt;
 }
