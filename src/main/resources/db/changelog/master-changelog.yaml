@@ -17,3 +17,6 @@ databaseChangeLog:
   - include:
       file: db/changelog/scripts/202205071028-create-review-table.sql
       context: local, production
+  - include:
+      file: db/changelog/scripts/202205071038-create-notification-table.sql
+      context: local, production
