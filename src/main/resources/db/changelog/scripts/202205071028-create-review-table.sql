@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS review
         CONSTRAINT review_pkey
             PRIMARY KEY,
     book_id     BIGINT    NOT NULL
-        CONSTRAINT fk_book_renting_request_review
+        CONSTRAINT fk_book_review
             REFERENCES book,
     score       INTEGER   NOT NULL,
     comment     VARCHAR(1000),
