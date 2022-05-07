@@ -1,1 +1,1 @@
-web: java -Dspring.profiles.active=prod -Dserver.port=$PORT ee/ut/library/LibraryApplication
+web: java -Dspring.profiles.active=prod -Dserver.port=$PORT --jar target/library-0.0.1-SNAPSHOT.jar
