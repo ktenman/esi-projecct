@@ -3,7 +3,7 @@ stages:
   - deploy
 
 maven-build:
-  image: maven:4.0.0-jdk-11
+  image: maven:4-jdk-11
   stage: build
   script: "mvn package -B"
   artifacts:
