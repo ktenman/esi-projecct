@@ -2,5 +2,5 @@
 
 --changeset Ziya:0
 insert into public.authority (id, role)
-values  (1, 'LIBRARIAN'),
-        (2, 'CUSTOMER');
+values  (nextval('seq_authority'), 'LIBRARIAN'),
+        (nextval('seq_authority'), 'CUSTOMER');
