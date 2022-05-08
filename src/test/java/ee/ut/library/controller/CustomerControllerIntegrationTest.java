@@ -1,13 +1,11 @@
 package ee.ut.library.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.ut.library.IntegrationTestBase;
 import ee.ut.library.domain.enums.Role;
 import ee.ut.library.dto.CustomerDto;
 import ee.ut.library.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
 import java.util.Set;
@@ -20,10 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WithMockUser(username = "John", authorities = {"LIBRARIAN"})
 class CustomerControllerIntegrationTest extends IntegrationTestBase {
-    @Resource
-    MockMvc mockMvc;
-    @Resource
-    ObjectMapper objectMapper;
     @Resource
     CustomerRepository customerRepository;
 

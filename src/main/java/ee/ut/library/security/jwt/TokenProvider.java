@@ -1,6 +1,11 @@
 package ee.ut.library.security.jwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
@@ -30,7 +35,6 @@ public class TokenProvider implements InitializingBean {
     private final long tokenValidityInMillisecondsForRememberMe;
 
     private Key key;
-
 
     public TokenProvider(
             @Value("${jwt.base64-secret}") String base64Secret,

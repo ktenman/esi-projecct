@@ -1,5 +1,6 @@
 package ee.ut.library;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.ut.library.configuration.ClearDatabaseBeforeTestMethod;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,8 +9,11 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.TestPropertySourceUtils;
+import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import javax.annotation.Resource;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -18,6 +22,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @AutoConfigureMockMvc
 @ClearDatabaseBeforeTestMethod
 public abstract class IntegrationTestBase {
+
+    @Resource
+    protected MockMvc mockMvc;
+    @Resource
+    protected ObjectMapper objectMapper;
 
     public static PostgreSQLContainer<?> postgreDBContainer = new PostgreSQLContainer<>("postgres:10-alpine");
 
