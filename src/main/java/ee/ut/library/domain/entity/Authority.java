@@ -4,18 +4,27 @@ import ee.ut.library.domain.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Setter
 @Getter
+@Table(name = "\"authority\"")
 public class Authority implements Serializable {
-    private static final String SEQ_PAYMENT = "seq_authority";
+    private static final String SEQ_AUTHORITY = "seq_authority";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_PAYMENT)
-    @SequenceGenerator(name = SEQ_PAYMENT, sequenceName = SEQ_PAYMENT, allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = SEQ_AUTHORITY)
+    @SequenceGenerator(name = SEQ_AUTHORITY, sequenceName = SEQ_AUTHORITY, allocationSize = 1)
     private Long id;
     @Enumerated(EnumType.STRING)
     private Role role;

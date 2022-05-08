@@ -41,8 +41,7 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: production
-  profiles:
-    active: local
+
 jwt:
   header: Authorization
   secret: mySecret

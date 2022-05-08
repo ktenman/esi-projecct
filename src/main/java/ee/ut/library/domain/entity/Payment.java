@@ -10,11 +10,12 @@ import org.hibernate.annotations.TypeDef;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import java.util.Map;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Getter
@@ -24,7 +25,7 @@ public class Payment extends Auditable {
     private static final String SEQ_PAYMENT = "seq_payment";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_PAYMENT)
+    @GeneratedValue(strategy = SEQUENCE, generator = SEQ_PAYMENT)
     @SequenceGenerator(name = SEQ_PAYMENT, sequenceName = SEQ_PAYMENT, allocationSize = 1)
     private Long id;
 

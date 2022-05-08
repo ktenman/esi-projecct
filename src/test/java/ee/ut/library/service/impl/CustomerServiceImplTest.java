@@ -28,7 +28,7 @@ class CustomerServiceImplTest {
         Customer expectedCustomer = new Customer(c -> c.setId(id));
         when(customerRepository.findById(id)).thenReturn(Optional.of(expectedCustomer));
 
-        Customer actualCustomer = customerService.get(id);
+        Customer actualCustomer = customerService.getOne(id);
 
         assertThat(actualCustomer.getId()).isEqualTo(id);
     }
