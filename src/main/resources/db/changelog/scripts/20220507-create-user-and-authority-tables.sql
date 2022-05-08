@@ -16,8 +16,12 @@ CREATE TABLE IF NOT EXISTS "user"
             UNIQUE,
     first_name          VARCHAR,
     last_name           VARCHAR,
-    email               VARCHAR,
+    email               VARCHAR
+        CONSTRAINT user_email
+            UNIQUE      NOT NULL,
     password            VARCHAR,
+    address             VARCHAR,
+    type                VARCHAR,
     phone_number        VARCHAR,
     activated           boolean default false
 );

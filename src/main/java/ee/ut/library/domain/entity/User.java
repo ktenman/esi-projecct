@@ -1,5 +1,6 @@
 package ee.ut.library.domain.entity;
 
+import ee.ut.library.domain.enums.UserType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,8 +34,12 @@ public class User extends Auditable {
     @Size(min = 2, max = 50)
     private String lastName;
     @Email
+    @Column(unique = true, nullable = false)
     private String email;
+    private String address;
     private boolean activated;
+    @Enumerated(EnumType.STRING)
+    private UserType type;
     private String phoneNumber;
     @ManyToMany
     @JoinTable(name = "user_authority",
