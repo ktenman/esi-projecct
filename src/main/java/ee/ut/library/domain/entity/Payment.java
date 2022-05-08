@@ -21,7 +21,7 @@ import java.util.Map;
 @Setter
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Payment extends Auditable {
-    private static final String SEQ_PAYMENT = "seq_librarian";
+    private static final String SEQ_PAYMENT = "seq_payment";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_PAYMENT)

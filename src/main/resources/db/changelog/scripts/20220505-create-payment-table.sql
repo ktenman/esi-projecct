@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS payment
         CONSTRAINT fk_payment_customer
             REFERENCES customer,
     created_at  TIMESTAMP NOT NULL,
-    created_by  BIGINT,
+    created_by  VARCHAR,
     modified_at TIMESTAMP,
-    modified_by BIGINT
+    modified_by VARCHAR
 );
 
 ALTER SEQUENCE IF EXISTS seq_payment
