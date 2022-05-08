@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS authority
     role                VARCHAR
 );
 
-ALTER SEQUENCE IF EXISTS seq_user
+ALTER SEQUENCE IF EXISTS seq_authority
     OWNED BY authority.id;
 
 CREATE TABLE IF NOT EXISTS user_authority
