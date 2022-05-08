@@ -1,4 +1,4 @@
-package ee.ut.library;
+package ee.ut.library.dto;
 
 import ee.ut.library.domain.enums.Role;
 import lombok.AllArgsConstructor;

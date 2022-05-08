@@ -1,13 +1,12 @@
 package ee.ut.library.service.impl;
 
-import ee.ut.library.CustomerDto;
 import ee.ut.library.domain.entity.Authority;
 import ee.ut.library.domain.entity.Customer;
 import ee.ut.library.domain.entity.User;
+import ee.ut.library.dto.CustomerDto;
 import ee.ut.library.exception.CustomerNotFoundException;
 import ee.ut.library.exception.GeneralException;
 import ee.ut.library.repository.CustomerRepository;
-import ee.ut.library.repository.UserRepository;
 import ee.ut.library.security.repository.AuthorityRepository;
 import ee.ut.library.service.CustomerService;
 import lombok.AllArgsConstructor;
@@ -19,9 +18,10 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
-    private final UserRepository userRepository;
+    private final UserServiceImpl userService;
     private final AuthorityRepository authorityRepository;
 
     @Override
@@ -50,24 +50,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
     public CustomerDto save(CustomerDto customerDto) {
         List<Authority> authorities = authorityRepository.findByRoleIn(customerDto.getRoles());
         if (authorities.isEmpty()) {
             throw new GeneralException("No authorities found");
         }
-        User user = new User(u -> {
-            u.setUsername(customerDto.getUserName());
-            u.setFirstName(customerDto.getFirstName());
-            u.setLastName(customerDto.getLastName());
-            u.setEmail(customerDto.getEmail());
-            u.setPassword(customerDto.getPassWord());
-            u.setActivated(customerDto.isActivated());
-            u.setPhoneNumber(customerDto.getPhoneNumber());
-            u.setAddress(customerDto.getAddress());
-            u.setAuthorities(new HashSet<>(authorities));
-        });
-        User savedUser = userRepository.save(user);
+        User user = new User(u -> saveOrUpdate(u, customerDto));
+        user.setAuthorities(new HashSet<>(authorities));
+        User savedUser = userService.insert(user);
         Customer customer = new Customer(c -> {
             c.setUser(savedUser);
             c.setIdCode(customerDto.getIdCode());
@@ -77,8 +67,35 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDto;
     }
 
+    private User saveOrUpdate(User user, CustomerDto customerDto) {
+        user.setUsername(customerDto.getUserName());
+        user.setFirstName(customerDto.getFirstName());
+        user.setLastName(customerDto.getLastName());
+        user.setEmail(customerDto.getEmail());
+        user.setPassword(customerDto.getPassWord());
+        user.setActivated(customerDto.isActivated());
+        user.setPhoneNumber(customerDto.getPhoneNumber());
+        user.setAddress(customerDto.getAddress());
+        return user;
+    }
+
     @Override
     public CustomerDto update(CustomerDto customerDto) {
-        return null;
+        User user = userService.getOne(customerDto.getUserId());
+        List<Authority> authorities = authorityRepository.findByRoleIn(customerDto.getRoles());
+        if (authorities.isEmpty()) {
+            throw new GeneralException("No authorities found");
+        }
+        user.setAuthorities(new HashSet<>(authorities));
+        userService.update(saveOrUpdate(user, customerDto));
+        Customer customer = customerRepository.findByUser(user);
+        if (customerDto.getIdCode().equals(customer.getIdCode()) &&
+                customerDto.getFineAmount().equals(customer.getFineAmount())) {
+            return customerDto;
+        }
+        customer.setIdCode(customerDto.getIdCode());
+        customer.setFineAmount(customerDto.getFineAmount());
+        customerRepository.save(customer);
+        return customerDto;
     }
 }

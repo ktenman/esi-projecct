@@ -1,7 +1,7 @@
 package ee.ut.library.controller;
 
-import ee.ut.library.CustomerDto;
 import ee.ut.library.domain.entity.Customer;
+import ee.ut.library.dto.CustomerDto;
 import ee.ut.library.service.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
