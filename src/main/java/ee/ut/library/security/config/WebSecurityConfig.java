@@ -3,10 +3,8 @@ package ee.ut.library.security.config;
 
 import ee.ut.library.security.jwt.JWTConfigurer;
 import ee.ut.library.security.jwt.TokenProvider;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,7 +14,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    public static final String[] API_DOC_URIS = new String[]{
+    private static final String[] API_DOC_URIS = new String[]{
             "/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources",
             "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**", "/actuator/*",
             "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/h2-console/**"

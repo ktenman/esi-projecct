@@ -16,8 +16,8 @@ import static ee.ut.library.domain.enums.ErrorText.VALIDATION_FAILED;
 @Slf4j
 @ControllerAdvice
 public class CustomExceptionHandler {
-    @ExceptionHandler(UserNotFoundException.class)
-    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException ex) {
+    @ExceptionHandler(CustomerNotFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(CustomerNotFoundException ex) {
         log.debug("Exception - {} and {}", ex.getClass(), ex.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.builder()
                 .title(ERR_USER_NOT_FOUND.getDescription())
