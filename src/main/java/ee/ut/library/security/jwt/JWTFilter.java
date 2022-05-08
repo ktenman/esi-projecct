@@ -1,7 +1,6 @@
 package ee.ut.library.security.jwt;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -18,10 +17,10 @@ import java.io.IOException;
  * Filters incoming requests and installs a Spring Security principal if a header corresponding to a valid user is
  * found.
  */
+@Slf4j
 public class JWTFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    private static final Logger LOG = LoggerFactory.getLogger(JWTFilter.class);
     private final TokenProvider tokenProvider;
 
     public JWTFilter(TokenProvider tokenProvider) {
@@ -38,9 +37,9 @@ public class JWTFilter extends GenericFilterBean {
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            LOG.debug("set Authentication to security context for '{}', uri: {}", authentication.getName(), requestURI);
+            log.debug("set Authentication to security context for '{}', uri: {}", authentication.getName(), requestURI);
         } else {
-            LOG.debug("no valid JWT token found, uri: {}", requestURI);
+            log.debug("no valid JWT token found, uri: {}", requestURI);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

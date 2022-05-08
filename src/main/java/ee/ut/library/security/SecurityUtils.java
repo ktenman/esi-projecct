@@ -1,16 +1,14 @@
 package ee.ut.library.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
+@Slf4j
 public class SecurityUtils {
-    private static final Logger LOG = LoggerFactory.getLogger(SecurityUtils.class);
-
 
     /**
      * @return the login of the current user.
@@ -19,7 +17,7 @@ public class SecurityUtils {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null) {
-            LOG.debug("no authentication in security context found");
+            log.debug("no authentication in security context found");
             return Optional.empty();
         }
 
@@ -31,7 +29,7 @@ public class SecurityUtils {
             username = (String) authentication.getPrincipal();
         }
 
-        LOG.debug("found username '{}' in security context", username);
+        log.debug("found username '{}' in security context", username);
 
         return Optional.ofNullable(username);
     }

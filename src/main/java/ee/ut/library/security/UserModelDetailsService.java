@@ -3,9 +3,9 @@ package ee.ut.library.security;
 import ee.ut.library.domain.entity.User;
 import ee.ut.library.exception.UserNotActivatedException;
 import ee.ut.library.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,15 +22,10 @@ import java.util.stream.Collectors;
  * Authenticate a user from the database.
  */
 @Component("userDetailsService")
+@Slf4j
+@AllArgsConstructor
 public class UserModelDetailsService implements UserDetailsService {
-
-    private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
-
     private final UserRepository userRepository;
-
-    public UserModelDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     @Transactional
