@@ -14,7 +14,7 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url:  jdbc:postgresql://localhost:54333/library?charSet\=UTF8
+    url: jdbc:postgresql://localhost:54333/library?charSet\=UTF8
     username: postgres
     password: admin
     hikari:
@@ -40,7 +40,7 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
-    contexts: local
+    contexts: production
 
 jwt:
   header: Authorization
