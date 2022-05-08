@@ -31,17 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
     }
-
-    // Configure paths and requests that should be ignored by Spring Security
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                // allow anonymous resource requests
-                .antMatchers(API_DOC_URIS);
-    }
-
     // Configure security settings
 
     @Override
@@ -68,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/users/**").permitAll()
+                .antMatchers(API_DOC_URIS).permitAll()
                 .anyRequest().authenticated()
 
                 .and()
