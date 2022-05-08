@@ -6,9 +6,9 @@ import ee.ut.library.domain.entity.Customer;
 import ee.ut.library.domain.entity.User;
 import ee.ut.library.exception.CustomerNotFoundException;
 import ee.ut.library.exception.GeneralException;
-import ee.ut.library.repository.AuthRepository;
 import ee.ut.library.repository.CustomerRepository;
 import ee.ut.library.repository.UserRepository;
+import ee.ut.library.security.repository.AuthorityRepository;
 import ee.ut.library.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
-    private final AuthRepository authorityRepository;
+    private final AuthorityRepository authorityRepository;
 
     @Override
     public List<Customer> findAll() {
