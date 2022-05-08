@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User get(Long id) {
-        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public User getOne(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
@@ -41,9 +41,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
 
     @Override
     @Transactional(readOnly = true)

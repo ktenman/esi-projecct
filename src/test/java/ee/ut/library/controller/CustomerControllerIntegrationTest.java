@@ -1,14 +1,16 @@
 package ee.ut.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ee.ut.library.CustomerDto;
 import ee.ut.library.IntegrationTestBase;
-import ee.ut.library.domain.entity.Customer;
-import ee.ut.library.domain.entity.User;
+import ee.ut.library.domain.enums.Role;
 import ee.ut.library.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -24,23 +26,25 @@ class CustomerControllerIntegrationTest extends IntegrationTestBase {
     CustomerRepository customerRepository;
 
     @Test
+    @WithMockUser(username = "John", authorities = {"LIBRARIAN"})
     void findAllCustomers() throws Exception {
         assertThat(customerRepository.findAll()).isEmpty();
 
-        Customer customer = new Customer(c -> {
-            User user = new User();
-
-            user.setAddress("aasdfa");
-            user.setEmail("sfda@fsda.com");
-            user.setFirstName("nanme");
-            user.setPhoneNumber("454353");
-            c.setUser(user);
-            c.setIdCode("39506100250");
-        });
+        CustomerDto customerDto = CustomerDto.builder()
+                .userName("ziya")
+                .passWord("tofig")
+                .firstName("siim")
+                .lastName("delta")
+                .email("siim@ut.ee")
+                .address("asdasdsada")
+                .phoneNumber("45464564")
+                .idCode("39506100250")
+                .roles(Set.of(Role.CUSTOMER))
+                .build();
 
         mockMvc.perform(post("/customers")
                         .contentType(APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(customer)))
+                        .content(objectMapper.writeValueAsString(customerDto)))
                 .andExpect(status().isOk());
 
         assertThat(customerRepository.findAll()).hasSize(1);
