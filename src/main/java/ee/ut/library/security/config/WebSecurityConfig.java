@@ -16,7 +16,11 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    public static final String[] API_DOC_URIS = new String[]{
+            "/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources",
+            "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**", "/actuator/*",
+            "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/h2-console/**"
+    };
     private final TokenProvider tokenProvider;
     private final CorsFilter corsFilter;
 
@@ -34,18 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
-
                 // allow anonymous resource requests
-                .antMatchers(
-                        "/actuator/*",
-                        "/",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js",
-                        "/h2-console/**"
-                );
+                .antMatchers(API_DOC_URIS);
     }
 
     // Configure security settings
