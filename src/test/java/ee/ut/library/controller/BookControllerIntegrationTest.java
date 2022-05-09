@@ -4,6 +4,7 @@ import ee.ut.library.IntegrationTestBase;
 import ee.ut.library.domain.entity.Book;
 import ee.ut.library.domain.enums.Category;
 import ee.ut.library.domain.enums.Status;
+import ee.ut.library.dto.CreateBookRequest;
 import ee.ut.library.exception.CustomExceptionHandler;
 import ee.ut.library.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,17 +48,17 @@ class BookControllerIntegrationTest extends IntegrationTestBase {
     void insertBook() throws Exception {
         assertThat(bookRepository.findAll()).isEmpty();
 
-        Book book = new Book();
-        book.setLanguage("English");
-        book.setAuthor("Mark Twain");
-        book.setTitle("The Adventures of Tom Sawyer");
-        book.setReleaseDate(LocalDate.ofYearDay(1876,1));
-        book.setCategories(List.of(Category.CHILDREN_S, Category.ACTION_AND_ADVENTURE, Category.YOUNG_ADULT));
-        book.setStatus(Status.AVAILABLE);
+        CreateBookRequest request = CreateBookRequest.builder()
+                .language("English")
+                .author("Mark Twain")
+                .title("The Adventures of Tom Sawyer")
+                .year(1876)
+                .categories(List.of(CHILDREN_S, ACTION_AND_ADVENTURE, YOUNG_ADULT))
+                .build();
 
         mockMvc.perform(post("/books")
                         .contentType(APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(book)))
+                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk());
 
         assertThat(bookRepository.findAll()).hasSize(1);
@@ -152,20 +153,13 @@ class BookControllerIntegrationTest extends IntegrationTestBase {
     @Test
     void insertBook_missingLanguage() throws Exception {
         assertThat(bookRepository.findAll()).isEmpty();
-
-        Book book = new Book();
-        book.setAuthor("Mark Twain");
-        book.setTitle("The Adventures of Tom Sawyer");
-        book.setReleaseDate(LocalDate.ofYearDay(1876,1));
-        book.setCategories(List.of(CHILDREN_S, ACTION_AND_ADVENTURE, YOUNG_ADULT));
-        book.setStatus(Status.AVAILABLE);
+        CreateBookRequest request = new CreateBookRequest();
 
         mockMvc.perform(post("/books")
                         .contentType(APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(book)))
+                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title").value("Internal Error"))
-                .andExpect(jsonPath("$.message").value("null language not supported"));
+                .andExpect(jsonPath("$.title").value("Some of field validations are failed"));
 
         assertThat(bookRepository.findAll()).isEmpty();
     }

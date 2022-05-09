@@ -2,6 +2,8 @@ package ee.ut.library.controller;
 
 import ee.ut.library.domain.entity.Book;
 import ee.ut.library.domain.enums.Status;
+import ee.ut.library.dto.CreateBookRequest;
+import ee.ut.library.dto.UpdateBookRequest;
 import ee.ut.library.service.BookService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -37,14 +39,14 @@ public class BookController {
 
     @PostMapping
     @ApiOperation(value = "Inserts new book")
-    public Book insert(@Valid @RequestBody Book book) {
-        return bookService.insert(book);
+    public Book insert(@Valid @RequestBody CreateBookRequest createBookRequest) {
+        return bookService.insert(createBookRequest);
     }
 
     @PutMapping
     @ApiOperation(value = "Updates the book")
-    public Book update(@Valid @RequestBody Book book) {
-        return bookService.update(book);
+    public Book update(@Valid @RequestBody UpdateBookRequest updateBookRequest) {
+        return bookService.update(updateBookRequest);
     }
 
     @DeleteMapping("/{id}")
