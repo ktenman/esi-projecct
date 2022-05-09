@@ -1,7 +1,7 @@
 package ee.ut.library.controller;
 
-import ee.ut.library.domain.enums.Status;
 import ee.ut.library.domain.entity.Book;
+import ee.ut.library.domain.enums.Status;
 import ee.ut.library.service.BookService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.regex.*;
 import javax.validation.Valid;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+import java.util.regex.Pattern;
 
 @RestController
 @AllArgsConstructor
@@ -83,10 +81,14 @@ public class BookController {
 
     @GetMapping("/statuses/{status}")
     @ApiOperation(value = "Retrieves books by status")
-    public List<Book> getBooksByStatus(@PathVariable String status) {
-        List<Book> books = bookService.findAll();
-        books.removeIf(book -> !book.getStatus().equals(status));
-        return books;
+    public List<Book> getBooksByStatus(@PathVariable Status status) {
+        return bookService.findAllByStatus(status);
+    }
+
+    @GetMapping("/available")
+    @ApiOperation(value = "Retrieves available books")
+    public List<Book> getAvailableBooks() {
+        return bookService.findAllByStatus(Status.AVAILABLE);
     }
 
     @GetMapping("/years/{year}")
@@ -94,14 +96,6 @@ public class BookController {
     public List<Book> getBooksByYear(@PathVariable String year) {
         List<Book> books = bookService.findAll();
         books.removeIf(book -> !book.getReleaseDate().equals(year));
-        return books;
-    }
-
-    @GetMapping("/available")
-    @ApiOperation(value = "Retrieves available books")
-    public List<Book> getAvailableBooks() {
-        List<Book> books = bookService.findAll();
-        books.removeIf(book -> !book.getStatus().equals(Status.AVAILABLE));
         return books;
     }
 }

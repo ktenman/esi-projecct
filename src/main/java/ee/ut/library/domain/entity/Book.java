@@ -1,5 +1,6 @@
 package ee.ut.library.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ee.ut.library.domain.enums.Category;
 import ee.ut.library.domain.enums.Status;
 import ee.ut.library.exception.GeneralException;
@@ -59,10 +60,12 @@ public class Book extends Auditable {
     @Column(name = "category")
     private List<Category> categories;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     @OrderBy("id DESC")
     private List<BookRentingRequest> bookRentingRequests;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     @OrderBy("id DESC")
     private List<Review> reviews;
