@@ -1,4 +1,4 @@
-package ee.ut.library.dto;
+package ee.ut.library.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

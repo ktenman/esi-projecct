@@ -1,10 +1,10 @@
 package ee.ut.library.controller;
 
 import ee.ut.library.IntegrationTestBase;
+import ee.ut.library.domain.dto.CreateBookRequest;
 import ee.ut.library.domain.entity.Book;
 import ee.ut.library.domain.enums.Category;
 import ee.ut.library.domain.enums.Status;
-import ee.ut.library.dto.CreateBookRequest;
 import ee.ut.library.exception.CustomExceptionHandler;
 import ee.ut.library.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
