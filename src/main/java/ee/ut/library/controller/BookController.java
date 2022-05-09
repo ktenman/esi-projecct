@@ -93,9 +93,7 @@ public class BookController {
 
     @GetMapping("/years/{year}")
     @ApiOperation(value = "Retrieves books by year")
-    public List<Book> getBooksByYear(@PathVariable String year) {
-        List<Book> books = bookService.findAll();
-        books.removeIf(book -> !book.getReleaseDate().equals(year));
-        return books;
+    public List<Book> getBooksByYear(@PathVariable Integer year) {
+        return bookService.getBooksByYear(year);
     }
 }

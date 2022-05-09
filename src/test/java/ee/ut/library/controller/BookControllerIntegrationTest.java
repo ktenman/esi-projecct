@@ -75,6 +75,17 @@ class BookControllerIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void getBooksByYear() throws Exception {
+        saveTwoBooksIntoDb();
+
+        mockMvc.perform(get("/books/years/1884")
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$.[0].releaseDate", equalTo("1884")));
+    }
+
+    @Test
     void getBooksByStatus() throws Exception {
         saveTwoBooksIntoDb();
 

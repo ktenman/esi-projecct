@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface BookService extends CrudService<Book> {
     List<Book> findAllByStatus(Status... statuses);
+
+    List<Book> getBooksByYear(Integer integer);
 }

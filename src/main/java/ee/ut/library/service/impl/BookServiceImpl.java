@@ -45,4 +45,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAllByStatus(Status... statuses) {
         return bookRepository.findAllByStatusIn(Set.of(statuses));
     }
+
+    @Override
+    public List<Book> getBooksByYear(Integer year) {
+        return bookRepository.findAllByYear(year);
+    }
 }
