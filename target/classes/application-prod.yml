@@ -14,9 +14,10 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:54333/library?charSet\=UTF8
-    username: postgres
-    password: admin
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-classname: org.postgresql.Driver
     hikari:
       maximumPoolSize: 5
   jpa:
@@ -41,13 +42,3 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: production
-
-jwt:
-  header: Authorization
-  secret: mySecret
-  expiration: 604800
-  route.authentication.path: /auth
-  route.authentication.refresh: /refresh
-  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI
-  token-validity-in-seconds: 86400
-  token-validity-in-seconds-for-remember-me: 108000
