@@ -1,7 +1,7 @@
 package ee.ut.library;
 
+import ee.ut.library.domain.dto.BookDto;
 import ee.ut.library.domain.entity.Book;
-import ee.ut.library.dto.BookDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
