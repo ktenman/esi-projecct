@@ -1,8 +1,8 @@
 package ee.ut.library.controller;
 
 import ee.ut.library.IntegrationTestBase;
-import ee.ut.library.domain.enums.Role;
 import ee.ut.library.domain.dto.CustomerDto;
+import ee.ut.library.domain.enums.Role;
 import ee.ut.library.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WithMockUser(username = "John", authorities = {"LIBRARIAN"})
+@WithMockUser(username = "John", authorities = {"CUSTOMER"})
 class CustomerControllerIntegrationTest extends IntegrationTestBase {
     @Resource
     CustomerRepository customerRepository;
