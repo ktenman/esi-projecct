@@ -14,8 +14,9 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/df5tgegia2p9dl?user=itphewplotswra&password=b90cf03d6c6d6b27bb8f7c224ef01d6f3e6010a987f916dbe7fc5c4432748add
-    driver-classname: org.postgresql.Driver
+    url:  jdbc:postgresql://localhost:54333/library?charSet\=UTF8
+    username: postgres
+    password: admin
     hikari:
       maximumPoolSize: 5
   jpa:
@@ -39,4 +40,4 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
-    contexts: production
+    contexts: local
