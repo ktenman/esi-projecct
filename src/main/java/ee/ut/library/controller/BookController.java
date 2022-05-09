@@ -1,6 +1,9 @@
 package ee.ut.library.controller;
 
 import ee.ut.library.domain.entity.Book;
+import ee.ut.library.domain.enums.Status;
+import ee.ut.library.dto.CreateBookRequest;
+import ee.ut.library.dto.UpdateBookRequest;
 import ee.ut.library.service.BookService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -36,14 +39,14 @@ public class BookController {
 
     @PostMapping
     @ApiOperation(value = "Inserts new book")
-    public Book insert(@Valid @RequestBody Book book) {
-        return bookService.insert(book);
+    public Book insert(@Valid @RequestBody CreateBookRequest createBookRequest) {
+        return bookService.insert(createBookRequest);
     }
 
     @PutMapping
     @ApiOperation(value = "Updates the book")
-    public Book update(@Valid @RequestBody Book book) {
-        return bookService.update(book);
+    public Book update(@Valid @RequestBody UpdateBookRequest updateBookRequest) {
+        return bookService.update(updateBookRequest);
     }
 
     @DeleteMapping("/{id}")
@@ -52,5 +55,39 @@ public class BookController {
         bookService.deleteById(id);
     }
 
+    @GetMapping("/titles/{title}")
+    @ApiOperation(value = "Retrieves books by title")
+    public List<Book> getBooksByTitle(@PathVariable String title) {
+        return bookService.getBooksByTitle(title);
+    }
 
+    @GetMapping("/authors/{author}")
+    @ApiOperation(value = "Retrieves books by author")
+    public List<Book> getBooksByAuthor(@PathVariable String author) {
+        return bookService.getBooksByAuthor(author);
+    }
+
+    @GetMapping("/languages/{lang}")
+    @ApiOperation(value = "Retrieves books by language")
+    public List<Book> getBooksByLanguage(@PathVariable String lang) {
+        return bookService.getBooksByLanguage(lang);
+    }
+
+    @GetMapping("/statuses/{status}")
+    @ApiOperation(value = "Retrieves books by status")
+    public List<Book> getBooksByStatus(@PathVariable Status status) {
+        return bookService.findAllByStatus(status);
+    }
+
+    @GetMapping("/available")
+    @ApiOperation(value = "Retrieves available books")
+    public List<Book> getAvailableBooks() {
+        return bookService.findAllByStatus(Status.AVAILABLE);
+    }
+
+    @GetMapping("/years/{year}")
+    @ApiOperation(value = "Retrieves books by year")
+    public List<Book> getBooksByYear(@PathVariable Integer year) {
+        return bookService.getBooksByYear(year);
+    }
 }
