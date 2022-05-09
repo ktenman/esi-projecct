@@ -3,7 +3,7 @@ package ee.ut.library.service.impl;
 import ee.ut.library.domain.entity.Authority;
 import ee.ut.library.domain.entity.Customer;
 import ee.ut.library.domain.entity.User;
-import ee.ut.library.dto.CustomerDto;
+import ee.ut.library.domain.dto.CustomerDto;
 import ee.ut.library.exception.CustomerNotFoundException;
 import ee.ut.library.exception.GeneralException;
 import ee.ut.library.repository.CustomerRepository;

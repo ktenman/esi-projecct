@@ -2,7 +2,7 @@ package ee.ut.library.controller;
 
 import ee.ut.library.IntegrationTestBase;
 import ee.ut.library.domain.enums.Role;
-import ee.ut.library.dto.CustomerDto;
+import ee.ut.library.domain.dto.CustomerDto;
 import ee.ut.library.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithMockUser;
