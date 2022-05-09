@@ -14,9 +14,7 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${HEROKU_POSTGRESQL_PINK_JDBC_URL}
-    username: ${HEROKU_POSTGRESQL_PINK_JDBC_USERNAME}
-    password: ${HEROKU_POSTGRESQL_PINK_JDBC_PASSWORD}
+    url: jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/df5tgegia2p9dl?user=itphewplotswra&password=b90cf03d6c6d6b27bb8f7c224ef01d6f3e6010a987f916dbe7fc5c4432748add
     driver-classname: org.postgresql.Driver
     hikari:
       maximumPoolSize: 5
@@ -42,13 +40,3 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: production
-
-jwt:
-  header: Authorization
-  secret: mySecret
-  expiration: 604800
-  route.authentication.path: /auth
-  route.authentication.refresh: /refresh
-  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI
-  token-validity-in-seconds: 86400
-  token-validity-in-seconds-for-remember-me: 108000
