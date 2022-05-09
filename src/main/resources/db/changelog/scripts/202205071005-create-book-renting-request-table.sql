@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS book_renting_request
     rented_at    TIMESTAMP,
     rented_until TIMESTAMP,
     created_at   TIMESTAMP   NOT NULL,
-    created_by   BIGINT,
+    created_by   VARCHAR,
     modified_at  TIMESTAMP,
-    modified_by  BIGINT
+    modified_by  VARCHAR
 );
 
 ALTER SEQUENCE IF EXISTS seq_book_renting_request

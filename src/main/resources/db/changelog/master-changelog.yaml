@@ -1,9 +1,12 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/scripts/20220504-create-customer-table.sql
+      file: db/changelog/scripts/20220507-create-user-and-authority-tables.sql
       context: local, production
   - include:
-      file: db/changelog/scripts/20220505-create-librarian-table.sql
+      file: db/changelog/scripts/20220507-insert-authorities.sql
+      context: local, production
+  - include:
+      file: db/changelog/scripts/20220504-create-customer-table.sql
       context: local, production
   - include:
       file: db/changelog/scripts/20220505-create-payment-table.sql
@@ -22,4 +25,7 @@ databaseChangeLog:
       context: local, production
   - include:
       file: db/changelog/scripts/202205071059-add-rental-fine-amount.sql
+      context: local, production
+  - include:
+      file: db/changelog/scripts/202205081445-increase-category-column-length.sql
       context: local, production

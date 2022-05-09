@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS notification
             REFERENCES book_renting_request,
     message     VARCHAR(1000),
     created_at  TIMESTAMP NOT NULL,
-    created_by  BIGINT,
+    created_by  VARCHAR,
     modified_at TIMESTAMP,
-    modified_by BIGINT
+    modified_by VARCHAR
 );
 
 ALTER SEQUENCE IF EXISTS seq_notification

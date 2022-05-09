@@ -8,20 +8,17 @@ CREATE TABLE IF NOT EXISTS customer
     id           BIGINT    NOT NULL
         CONSTRAINT customer_pkey
             PRIMARY KEY,
-    name         VARCHAR,
-    address      VARCHAR,
-    email        VARCHAR
-        CONSTRAINT customer_email
-            UNIQUE         NOT NULL,
-    phone_number VARCHAR,
     id_code      VARCHAR
         CONSTRAINT customer_id_code
             UNIQUE         NOT NULL,
     fine_amount  DECIMAL(10, 5) DEFAULT 0,
+    user_id      BIGINT NOT NULL
+        CONSTRAINT fk_user
+            REFERENCES "user",
     created_at   TIMESTAMP NOT NULL,
-    created_by   BIGINT,
+    created_by   VARCHAR,
     modified_at  TIMESTAMP,
-    modified_by  BIGINT
+    modified_by  VARCHAR
 );
 
 ALTER SEQUENCE IF EXISTS seq_customer

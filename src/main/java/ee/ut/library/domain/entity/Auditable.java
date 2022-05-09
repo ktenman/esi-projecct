@@ -16,12 +16,12 @@ import java.time.Instant;
 public abstract class Auditable {
     @CreatedBy
     @Column(updatable = false)
-    protected Long createdBy;
+    protected String createdBy;
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
     protected Instant createdAt;
     @LastModifiedBy
-    protected Long modifiedBy;
+    protected String modifiedBy;
     @UpdateTimestamp
     protected Instant modifiedAt;
 }

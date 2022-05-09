@@ -1,5 +1,7 @@
 package ee.ut.library.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ee.ut.library.domain.enums.Category;
 import ee.ut.library.domain.enums.Status;
 import ee.ut.library.exception.GeneralException;
@@ -7,6 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -45,19 +50,25 @@ public class Book extends Auditable {
     @SequenceGenerator(name = SEQ_BOOK, sequenceName = SEQ_BOOK, allocationSize = 1)
     private Long id;
     private String author;
+    @NotNull
     private String title;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy")
     private LocalDate releaseDate;
     @Enumerated(EnumType.STRING)
     private Status status = AVAILABLE;
 
     private String language;
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    @Convert(converter = CategoryListToStringConverter.class)
+    @Column(name = "category")
+    private List<Category> categories;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     @OrderBy("id DESC")
     private List<BookRentingRequest> bookRentingRequests;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     @OrderBy("id DESC")
     private List<Review> reviews;
@@ -65,6 +76,7 @@ public class Book extends Auditable {
     public void setLanguage(String language) {
         Optional.ofNullable(language)
                 .filter(StringUtils::isNotBlank)
+                .map(StringUtils::lowerCase)
                 .filter(LANGUAGES::contains)
                 .orElseThrow(() -> new GeneralException(String.format("%s language not supported", language)));
         this.language = language;
