@@ -50,4 +50,19 @@ public class BookServiceImpl implements BookService {
     public List<Book> getBooksByYear(Integer year) {
         return bookRepository.findAllByYear(year);
     }
+
+    @Override
+    public List<Book> getBooksByAuthor(String author) {
+        return bookRepository.findByAuthorContainingIgnoreCase(author);
+    }
+
+    @Override
+    public List<Book> getBooksByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    @Override
+    public List<Book> getBooksByLanguage(String language) {
+        return bookRepository.findByLanguageLikeIgnoreCase(language);
+    }
 }

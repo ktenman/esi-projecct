@@ -9,4 +9,10 @@ public interface BookService extends CrudService<Book> {
     List<Book> findAllByStatus(Status... statuses);
 
     List<Book> getBooksByYear(Integer integer);
+
+    List<Book> getBooksByAuthor(String author);
+
+    List<Book> getBooksByTitle(String title);
+
+    List<Book> getBooksByLanguage(String language);
 }

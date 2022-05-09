@@ -96,9 +96,42 @@ class BookControllerIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.[0].status", equalTo("RENTED")));
     }
 
+    @Test
+    void getBooksByLanguage() throws Exception {
+        saveTwoBooksIntoDb();
+
+        mockMvc.perform(get("/books/languages/estonian")
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$.[0].language", equalTo("Estonian")));
+    }
+
+    @Test
+    void getBooksByTitle() throws Exception {
+        saveTwoBooksIntoDb();
+
+        mockMvc.perform(get("/books/titles/sawyer")
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$.[0].title", equalTo("The Adventures of Tom Sawyer")));
+    }
+
+    @Test
+    void getBooksByAuthor() throws Exception {
+        saveTwoBooksIntoDb();
+
+        mockMvc.perform(get("/books/authors/twain")
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$.[0].author", equalTo("Mark Twain")));
+    }
+
     private void saveTwoBooksIntoDb() {
         Book book = new Book();
-        book.setLanguage("English");
+        book.setLanguage("Estonian");
         book.setAuthor("Mark Twain");
         book.setTitle("The Adventures of Tom Sawyer");
         book.setReleaseDate(LocalDate.ofYearDay(1876,1));

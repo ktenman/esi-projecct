@@ -16,4 +16,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("select b from Book b where year(b.releaseDate) = :year")
     List<Book> findAllByYear(@Param("year") Integer year);
+
+    List<Book> findByAuthorContainingIgnoreCase(String author);
+    List<Book> findByTitleContainingIgnoreCase(String title);
+    List<Book> findByLanguageLikeIgnoreCase(String language);
 }

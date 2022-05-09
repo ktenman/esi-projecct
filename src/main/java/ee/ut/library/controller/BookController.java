@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @RestController
 @AllArgsConstructor
@@ -57,26 +56,19 @@ public class BookController {
     @GetMapping("/titles/{title}")
     @ApiOperation(value = "Retrieves books by title")
     public List<Book> getBooksByTitle(@PathVariable String title) {
-        List<Book> books = bookService.findAll();
-        // Regex to match the title
-        books.removeIf(book -> !Pattern.matches(title, book.getTitle()));
-        return books;
+        return bookService.getBooksByTitle(title);
     }
 
     @GetMapping("/authors/{author}")
     @ApiOperation(value = "Retrieves books by author")
     public List<Book> getBooksByAuthor(@PathVariable String author) {
-        List<Book> books = bookService.findAll();
-        books.removeIf(book -> !Pattern.matches(author, book.getAuthor()));
-        return books;
+        return bookService.getBooksByAuthor(author);
     }
 
     @GetMapping("/languages/{lang}")
     @ApiOperation(value = "Retrieves books by language")
     public List<Book> getBooksByLanguage(@PathVariable String lang) {
-        List<Book> books = bookService.findAll();
-        books.removeIf(book -> !book.getLanguage().equals(lang));
-        return books;
+        return bookService.getBooksByLanguage(lang);
     }
 
     @GetMapping("/statuses/{status}")
